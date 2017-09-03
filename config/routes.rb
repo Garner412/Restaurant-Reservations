@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
-  root 'reservation#index'
+  root 'reservations#index'
 
-  post "reservations/new", to: "reservations#new"
+  post "reservations/new", to: "reservations#create"
 
 end

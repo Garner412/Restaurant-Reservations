@@ -1,0 +1,22 @@
+
+<form class="" action="reservations/new" method="post">
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  First Name:<br>
+    <input type="text" name="firstname"><br>
+  Phone Number:<br>
+    <input type="text" name="phonenumber"><br>
+  Number of Seats:<br>
+    <input type="text" name="lastname"><br>
+  Reservation Time:<br>
+    <input type="datetime-local" name="reservationtime" />
+  <input type="submit" value="Submit">
+</form><br><br>
+
+<ul>
+  <% @reservations.each do |reserv| %>
+    <li><%= reserv.customer.name %></li>
+    <li><%= reserv.table.number %></li>
+    <li><%= reserv.num_of_seats_reserved %></li>
+    <li><%= reserv.reservation_time %></li>
+  <% end %>
+</ul>
