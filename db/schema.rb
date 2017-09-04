@@ -20,7 +20,8 @@ ActiveRecord::Schema.define(version: 20170903050040) do
     t.string   "name",                  null: false
     t.integer  "table_id",              null: false
     t.integer  "num_of_seats_reserved"
-    t.datetime "reservation_time",      null: false
+    t.date     "reservation_date",      null: false
+    t.integer  "hour",                  null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
