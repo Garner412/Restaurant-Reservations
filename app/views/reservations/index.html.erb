@@ -1,0 +1,23 @@
+<%= form_for :reservation, url: reservations_new_path  do |f| %>
+  <%= f.label :name  %>
+  <%= f.text_field :name  %><br>
+  <%= f.label :num_of_seats_reserved  %>
+  <%= f.number_field :num_of_seats_reserved %><br>
+  <%= f.label :reservation_date  %>
+  <%= f.date_field :reservation_date %><br>
+  <%= f.label :hour  %>
+  <%= f.number_field :hour %><br>
+  <%= f.submit "Submit" %><br>
+<% end %>
+
+
+<ul>
+  <% @reservations.each do |reserv| %>
+    <li>Name: <%= reserv.name %></li>
+    <li>Table Number: <%= reserv.table.number %></li>
+    <li>Seats Reserved: <%= reserv.num_of_seats_reserved %></li>
+    <li>Date: <%= reserv.reservation_date %></li>
+    <li>Time: <%= reserv.hour %></li>
+    <br>
+  <% end %>
+</ul>

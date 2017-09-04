@@ -16,23 +16,16 @@ ActiveRecord::Schema.define(version: 20170903050040) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "customers", force: :cascade do |t|
-    t.string   "name",         null: false
-    t.string   "phone_number"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-  end
-
   create_table "reservations", force: :cascade do |t|
-    t.integer  "customer_id",           null: false
+    t.string   "name",                  null: false
     t.integer  "table_id",              null: false
     t.integer  "num_of_seats_reserved"
-    t.datetime "reservation_time",      null: false
+    t.date     "reservation_date",      null: false
+    t.integer  "hour",                  null: false
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
   end
 
-  add_index "reservations", ["customer_id"], name: "index_reservations_on_customer_id", using: :btree
   add_index "reservations", ["table_id"], name: "index_reservations_on_table_id", using: :btree
 
   create_table "tables", force: :cascade do |t|
