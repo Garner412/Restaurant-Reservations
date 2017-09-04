@@ -1,22 +1,23 @@
-
-<form class="" action="reservations/new" method="post">
-  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-  First Name:<br>
-    <input type="text" name="firstname"><br>
-  Number of Seats:<br>
-    <input type="text" name="lastname"><br>
-  Reservation Time:<br>
-    <input type="datetime-local" name="reservationtime" />
-  <input type="submit" value="Submit">
-</form><br><br>
-
+<%= form_for :reservation, url: reservations_new_path  do |f| %>
+  <%= f.label :name  %>
+  <%= f.text_field :name  %><br>
+  <%= f.label :num_of_seats_reserved  %>
+  <%= f.number_field :num_of_seats_reserved %><br>
+  <%= f.label :reservation_date  %>
+  <%= f.date_field :reservation_date %><br>
+  <%= f.label :hour  %>
+  <%= f.number_field :hour %><br>
+  <%= f.submit "Submit" %><br>
+<% end %>
 
 
 <ul>
   <% @reservations.each do |reserv| %>
-    <li><%= reserv.customer.name %></li>
-    <li><%= reserv.table.number %></li>
-    <li><%= reserv.num_of_seats_reserved %></li>
-    <li><%= reserv.reservation_time %></li>
+    <li>Name: <%= reserv.name %></li>
+    <li>Table Number: <%= reserv.table.number %></li>
+    <li>Seats Reserved: <%= reserv.num_of_seats_reserved %></li>
+    <li>Date: <%= reserv.reservation_date %></li>
+    <li>Time: <%= reserv.hour %></li>
+    <br>
   <% end %>
 </ul>
