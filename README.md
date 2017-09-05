@@ -5,7 +5,6 @@ This application was built to create a restaurant reservation system. Patrons ca
 
 ### In Progress / Future Optimizations
 - Ajax form submission and table addition
-- Utilizing capybara for more robust testing
 
 ### Built With
 - Ruby on Rails
