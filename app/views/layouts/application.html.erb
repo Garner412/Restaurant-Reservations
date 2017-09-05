@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>RestaurantReservations</title>
+  <title>Restaurant Reservations</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <span class="navbar-text">
+        <h4>Restaurant Reservations</h4>
+      </span>
+    </div>
+  </nav>
 <%= yield %>
 
 </body>
