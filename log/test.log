@@ -4663,3 +4663,134 @@ Completed 302 Found in 6ms (ActiveRecord: 1.6ms)
   [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 1], ["num_of_seats", 4], ["created_at", "2017-09-05 19:15:33.010944"], ["updated_at", "2017-09-05 19:15:33.010944"]]
   [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
   [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+Processing by ReservationsController#index as HTML
+  Rendered reservations/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 17ms (Views: 15.7ms | ActiveRecord: 0.0ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.5ms)[0m  INSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["number", 2], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.276395"], ["updated_at", "2017-09-05 19:18:02.276395"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "reservations" ("name", "table_id", "num_of_seats_reserved", "reservation_date", "hour", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "Test"], ["table_id", 180], ["num_of_seats_reserved", 3], ["reservation_date", "2017-09-10"], ["hour", 1], ["created_at", "2017-09-05 19:18:02.295029"], ["updated_at", "2017-09-05 19:18:02.295029"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ReservationsController#index as HTML
+  Rendered reservations/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms)
+  [1m[36mReservation Load (2.4ms)[0m  [1mSELECT "reservations".* FROM "reservations"  ORDER BY reservation_date, hour, name[0m
+  [1m[35m (0.6ms)[0m  ROLLBACK
+  [1m[36m (0.3ms)[0m  [1mBEGIN[0m
+Processing by ReservationsController#index as HTML
+  Rendered reservations/index.html.erb within layouts/application (0.1ms)
+Completed 200 OK in 1ms (Views: 0.7ms | ActiveRecord: 0.0ms)
+  [1m[35m (0.2ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+Processing by ReservationsController#create as HTML
+  Parameters: {"reservation"=>{"name"=>"test", "num_of_seats_reserved"=>"3", "reservation_date"=>"2017-09-10", "hour"=>"1"}}
+  [1m[35mTable Load (0.4ms)[0m  SELECT "tables".* FROM "tables"  ORDER BY "tables"."num_of_seats" ASC
+  [1m[36mTable Load (0.5ms)[0m  [1mSELECT "tables".* FROM "tables" INNER JOIN "reservations" ON "reservations"."table_id" = "tables"."id" WHERE "reservations"."reservation_date" = $1 AND "reservations"."hour" = $2[0m  [["reservation_date", "2017-09-10"], ["hour", 1]]
+Redirected to http://test.host/
+Completed 302 Found in 17ms (ActiveRecord: 0.9ms)
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 2], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.340837"], ["updated_at", "2017-09-05 19:18:02.340837"]]
+  [1m[35m (0.2ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reservations"[0m
+Processing by ReservationsController#create as HTML
+  Parameters: {"reservation"=>{"name"=>"test", "num_of_seats_reserved"=>"3", "reservation_date"=>"2017-09-10", "hour"=>"1"}}
+  [1m[35mTable Load (0.4ms)[0m  SELECT "tables".* FROM "tables"  ORDER BY "tables"."num_of_seats" ASC
+  [1m[36mTable Load (0.4ms)[0m  [1mSELECT "tables".* FROM "tables" INNER JOIN "reservations" ON "reservations"."table_id" = "tables"."id" WHERE "reservations"."reservation_date" = $1 AND "reservations"."hour" = $2[0m  [["reservation_date", "2017-09-10"], ["hour", 1]]
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "reservations" ("name", "table_id", "num_of_seats_reserved", "reservation_date", "hour", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["name", "test"], ["table_id", 181], ["num_of_seats_reserved", 3], ["reservation_date", "2017-09-10"], ["hour", 1], ["created_at", "2017-09-05 19:18:02.363700"], ["updated_at", "2017-09-05 19:18:02.363700"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Redirected to http://test.host/
+Completed 302 Found in 18ms (ActiveRecord: 1.3ms)
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "reservations"[0m
+  [1m[35m (0.6ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.4ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 2], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.375124"], ["updated_at", "2017-09-05 19:18:02.375124"]]
+  [1m[35m (0.3ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ReservationsController#create as HTML
+  Parameters: {"reservation"=>{"name"=>"test", "num_of_seats_reserved"=>"3", "reservation_date"=>"2017-09-10", "hour"=>"1"}}
+  [1m[36mTable Load (0.4ms)[0m  [1mSELECT "tables".* FROM "tables"  ORDER BY "tables"."num_of_seats" ASC[0m
+  [1m[35mTable Load (0.4ms)[0m  SELECT "tables".* FROM "tables" INNER JOIN "reservations" ON "reservations"."table_id" = "tables"."id" WHERE "reservations"."reservation_date" = $1 AND "reservations"."hour" = $2  [["reservation_date", "2017-09-10"], ["hour", 1]]
+  [1m[36m (0.2ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "reservations" ("name", "table_id", "num_of_seats_reserved", "reservation_date", "hour", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["name", "test"], ["table_id", 182], ["num_of_seats_reserved", 3], ["reservation_date", "2017-09-10"], ["hour", 1], ["created_at", "2017-09-05 19:18:02.389530"], ["updated_at", "2017-09-05 19:18:02.389530"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 9ms (ActiveRecord: 1.4ms)
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.2ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 2], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.396141"], ["updated_at", "2017-09-05 19:18:02.396141"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ReservationsController#create as HTML
+  Parameters: {"reservation"=>{"name"=>"test", "num_of_seats_reserved"=>"3", "reservation_date"=>"2017-09-10", "hour"=>"1"}}
+  [1m[36mTable Load (0.8ms)[0m  [1mSELECT "tables".* FROM "tables"  ORDER BY "tables"."num_of_seats" ASC[0m
+  [1m[35mTable Load (0.8ms)[0m  SELECT "tables".* FROM "tables" INNER JOIN "reservations" ON "reservations"."table_id" = "tables"."id" WHERE "reservations"."reservation_date" = $1 AND "reservations"."hour" = $2  [["reservation_date", "2017-09-10"], ["hour", 1]]
+  [1m[36m (0.4ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "reservations" ("name", "table_id", "num_of_seats_reserved", "reservation_date", "hour", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"  [["name", "test"], ["table_id", 183], ["num_of_seats_reserved", 3], ["reservation_date", "2017-09-10"], ["hour", 1], ["created_at", "2017-09-05 19:18:02.410823"], ["updated_at", "2017-09-05 19:18:02.410823"]]
+  [1m[36m (0.2ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/
+Completed 302 Found in 14ms (ActiveRecord: 2.5ms)
+  [1m[35m (0.4ms)[0m  ROLLBACK
+  [1m[36m (0.2ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 2], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.419339"], ["updated_at", "2017-09-05 19:18:02.419339"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+Processing by ReservationsController#create as HTML
+  Parameters: {"reservation"=>{"name"=>"test", "num_of_seats_reserved"=>"5", "reservation_date"=>"2017-09-10", "hour"=>"1"}}
+  [1m[36mTable Load (0.4ms)[0m  [1mSELECT "tables".* FROM "tables"  ORDER BY "tables"."num_of_seats" ASC[0m
+  [1m[35mTable Load (0.3ms)[0m  SELECT "tables".* FROM "tables" INNER JOIN "reservations" ON "reservations"."table_id" = "tables"."id" WHERE "reservations"."reservation_date" = $1 AND "reservations"."hour" = $2  [["reservation_date", "2017-09-10"], ["hour", 1]]
+Redirected to http://test.host/
+Completed 302 Found in 3ms (ActiveRecord: 0.7ms)
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.5ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.3ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.2ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
+  [1m[35m (0.1ms)[0m  BEGIN
+  [1m[36m (0.1ms)[0m  [1mSAVEPOINT active_record_1[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"  [["number", 1], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.492521"], ["updated_at", "2017-09-05 19:18:02.492521"]]
+  [1m[36m (0.1ms)[0m  [1mRELEASE SAVEPOINT active_record_1[0m
+  [1m[35m (0.1ms)[0m  ROLLBACK
+  [1m[36m (0.1ms)[0m  [1mBEGIN[0m
+  [1m[35m (0.1ms)[0m  SAVEPOINT active_record_1
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "tables" ("number", "num_of_seats", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["number", 1], ["num_of_seats", 4], ["created_at", "2017-09-05 19:18:02.495996"], ["updated_at", "2017-09-05 19:18:02.495996"]]
+  [1m[35m (0.1ms)[0m  RELEASE SAVEPOINT active_record_1
+  [1m[36m (0.1ms)[0m  [1mROLLBACK[0m
