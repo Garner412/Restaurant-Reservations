@@ -1,23 +1,67 @@
-<%= form_for :reservation, url: reservations_new_path  do |f| %>
-  <%= f.label :name  %>
-  <%= f.text_field :name  %><br>
-  <%= f.label :num_of_seats_reserved  %>
-  <%= f.number_field :num_of_seats_reserved %><br>
-  <%= f.label :reservation_date  %>
-  <%= f.date_field :reservation_date %><br>
-  <%= f.label :hour  %>
-  <%= f.number_field :hour %><br>
-  <%= f.submit "Submit" %><br>
-<% end %>
+<div class="container">
+  <h2>New Reservation</h2><br>
+  <%= form_for :reservation, url: reservations_new_path, class: "form-inline" do |f| %>
+    <div class="form-group row">
+      <%= f.label :name, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.text_field :name, class: 'form-control' %><br>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label "Seats to Reserve", class: "col-sm-2 col-form-label"  %>
+      <div class="col-sm-4">
+        <%= f.number_field :num_of_seats_reserved, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %><br>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label :reservation_date, class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.date_field :reservation_date, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+      </div>
+    </div>
+    <div class="form-group row">
+      <%= f.label "Reservation Time (Military Time)", class: "col-sm-2 col-form-label" %>
+      <div class="col-sm-4">
+        <%= f.number_field :hour, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
+      </div>
+    </div>
+      <div class="form-group row">
+        <div class="col-sm-10">
+          <%= f.submit "Submit", class: 'btn btn-success' %><br>
+        </div>
+      </div>
+  <% end %><br><br>
 
+  <h2>Reservations</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Table Number</th>
+          <th>Seats Reserved</th>
+          <th>Reservation Date</th>
+          <th>Reservation Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reservations.each do |reserv| %>
+        <tr>
+          <td><%= reserv.name %></td>
+          <td><%= reserv.table.number %></td>
+          <td><%= reserv.num_of_seats_reserved %></td>
+          <td><%= reserv.reservation_date.strftime("%m/%d/%Y") %></td>
+          <% if reserv.hour == 0 %>
+            <td>12:00 AM</td>
+          <% elsif reserv.hour == 12 %>
+              <td>12:00 PM</td>
+          <% elsif reserv.hour < 12 %>
+            <td><%= reserv.hour %>:00 AM</td>
+          <% elsif reserv.hour > 12 %>
+            <td><%= reserv.hour - 12 %>:00 PM</td>
+          <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
 
-<ul>
-  <% @reservations.each do |reserv| %>
-    <li>Name: <%= reserv.name %></li>
-    <li>Table Number: <%= reserv.table.number %></li>
-    <li>Seats Reserved: <%= reserv.num_of_seats_reserved %></li>
-    <li>Date: <%= reserv.reservation_date %></li>
-    <li>Time: <%= reserv.hour %></li>
-    <br>
-  <% end %>
-</ul>
+</div>
