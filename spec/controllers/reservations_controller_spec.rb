@@ -55,10 +55,6 @@ RSpec.describe ReservationsController, type: :controller do
         post :create, { reservation: { name: "test", num_of_seats_reserved: 5, reservation_date: Date.new(2017,9,10), hour: 1 } }
         expect(flash.now[:alert]).to eq("Reservation Failed: Seating Capacity Exceeded")
       end
-
     end
-
-
   end
-
 end
