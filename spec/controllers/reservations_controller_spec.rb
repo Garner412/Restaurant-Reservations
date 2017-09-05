@@ -32,13 +32,19 @@ RSpec.describe ReservationsController, type: :controller do
         expect { post :create, { reservation: { name: "test", num_of_seats_reserved: 3, reservation_date: Date.new(2017,9,10), hour: 1 } } }.to change {Reservation.all.count}.by(1)
       end
 
+      it "creates a new reservation for required tables in the database" do
+        Table.create(number: 2, num_of_seats: 4)
+        Table.create(number: 3, num_of_seats: 4)
+        expect { post :create, { reservation: { name: "test", num_of_seats_reserved: 7, reservation_date: Date.new(2017,9,10), hour: 1 } } }.to change {Reservation.all.count}.by(2)
+      end
+
       it "redirects to index page" do
         Table.create(number:2, num_of_seats: 4)
         post :create, { reservation: { name: "test", num_of_seats_reserved: 3, reservation_date: Date.new(2017,9,10), hour: 1 } }
         expect(response).to redirect_to(root_path)
       end
 
-      it "flashes a success message when reservation is successfully made" do
+      it "flashes a success message when seats are available" do
         Table.create(number:2, num_of_seats: 4)
         post :create, { reservation: { name: "test", num_of_seats_reserved: 3, reservation_date: Date.new(2017,9,10), hour: 1 } }
         expect(flash.now[:notice]).to eq("Reservation has successfully been created")
