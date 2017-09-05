@@ -18,6 +18,7 @@ class ReservationsController < ApplicationController
 
     if total_capacity_available < reservation_params[:num_of_seats_reserved].to_i
       flash[:alert] = "Reservation Failed: Seating Capacity Exceeded"
+
     elsif available_tables[-1].num_of_seats >= reservation_params[:num_of_seats_reserved].to_i
       available_tables.each do |table|
         if table.num_of_seats >= reservation_params[:num_of_seats_reserved].to_i
@@ -26,6 +27,7 @@ class ReservationsController < ApplicationController
         end
       end
       flash[:notice] = "Reservation has successfully been created"
+      
     else
       seats_needed = reservation_params[:num_of_seats_reserved].to_i
 
