@@ -16,10 +16,8 @@ class Reservation < ActiveRecord::Base
         book_table(reservation_params, available_tables[-1])
       else
         available_tables.each do |table|
-          if !compare_seats(table, seats_needed)
-            book_table(reservation_params, table)
-            break
-          end
+          book_table(reservation_params, table) if !compare_seats(table, seats_needed)
+          break
         end
       end
       seats_needed -= available_tables[-1].num_of_seats
