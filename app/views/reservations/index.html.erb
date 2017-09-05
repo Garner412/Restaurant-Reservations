@@ -4,13 +4,13 @@
     <div class="form-group row">
       <%= f.label :name, class: "col-sm-2 col-form-label" %>
       <div class="col-sm-4">
-        <%= f.text_field :name, class: 'form-control' %><br>
+        <%= f.text_field :name, class: 'form-control' %>
       </div>
     </div>
     <div class="form-group row">
       <%= f.label "Seats to Reserve", class: "col-sm-2 col-form-label"  %>
       <div class="col-sm-4">
-        <%= f.number_field :num_of_seats_reserved, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %><br>
+        <%= f.number_field :num_of_seats_reserved, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
       </div>
     </div>
     <div class="form-group row">
@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="form-group row">
-      <%= f.label "Reservation Time (Military Time)", class: "col-sm-2 col-form-label" %>
+      <%= f.label "Reservation Time (0-23)", class: "col-sm-2 col-form-label" %>
       <div class="col-sm-4">
         <%= f.number_field :hour, class: 'form-control mb-2 mr-sm-2 mb-sm-0' %>
       </div>
