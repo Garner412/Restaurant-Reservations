@@ -4,8 +4,6 @@
 This application was built to create a restaurant reservation system. Patrons call in and and user of the system enters their information into a form, which reserves a table of appropriate size. Reservations occur at the top of the hour and last for one hour.
 
 ### In Progress / Future Optimizations
-- Logic for combining tables
-- Creating alerts for success/failure when booking reservation
 - Refactoring controller logic
 - Controller tests
 - Ajax form submission and table addition if successful
