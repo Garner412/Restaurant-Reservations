@@ -1,28 +1,18 @@
-== README
+# Restaurant Reservations
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Purpose
+This application was built to create a restaurant reservation system. Patrons call in and and user of the system enters their information into a form, which reserves a table of appropriate size. Reservations occur at the top of the hour and last for one hour.
 
-Things you may want to cover:
+### In Progress / Future Optimizations
+- Logic for combining tables
+- Creating alerts for success/failure when booking reservation
+- Refactoring controller logic
+- Controller tests
+- Ajax form submission and table addition if successful
+- Utilizing capybara for more robust testing
 
-* Ruby version
+### Built With
+- Ruby on Rails
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+### Developed by:
+- Greg Garner
