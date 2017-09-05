@@ -5,39 +5,19 @@ class ReservationsController < ApplicationController
   end
 
   def create
-
+    # I know this adds an additional query to find the available tables, but for some reason I could not get where.not to work for this query.
     reserved_tables = Table.joins(:reservations).merge(Reservation.where(reservation_date: reservation_params[:reservation_date], hour: reservation_params[:hour]))
     all_tables = Table.all.order(:num_of_seats)
     available_tables = all_tables - reserved_tables
-    total_capacity_available = 0
 
-    available_tables.each do |table|
-      total_capacity_available += table.num_of_seats
-    end
+    total_capacity_available = available_tables.inject(0) { |sum, tables| sum + tables[:num_of_seats] }
 
     if total_capacity_available < reservation_params[:num_of_seats_reserved].to_i
       flash[:alert] = "Reservation Failed: Seating Capacity Exceeded"
     else
-      seats_needed = reservation_params[:num_of_seats_reserved].to_i
-      while seats_needed > 0
-        if available_tables[-1].num_of_seats <= seats_needed
-          @reservation = Reservation.new(name: reservation_params[:name], table: available_tables[-1], num_of_seats_reserved: reservation_params[:num_of_seats_reserved], reservation_date: reservation_params[:reservation_date], hour: reservation_params[:hour])
-          @reservation.save
-        else
-          available_tables.each do |table|
-            if table.num_of_seats >= seats_needed
-              @reservation = Reservation.new(name: reservation_params[:name], table: table, num_of_seats_reserved: reservation_params[:num_of_seats_reserved], reservation_date: reservation_params[:reservation_date], hour: reservation_params[:hour])
-              @reservation.save
-              break
-            end
-          end
-        end
-        seats_needed -= available_tables[-1].num_of_seats
-        available_tables.pop
-      end
+      Reservation.make_reservation(available_tables, reservation_params)
       flash[:notice] = "Reservation has successfully been created"
     end
-
     redirect_to root_path
   end
 
