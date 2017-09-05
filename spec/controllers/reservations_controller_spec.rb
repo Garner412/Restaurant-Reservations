@@ -11,12 +11,6 @@ RSpec.describe ReservationsController, type: :controller do
       expect(response).to have_http_status 200
     end
 
-    it "assigns the all reservations as @reservations" do
-      reservation = Reservation.create!(name: "Test", table: table, num_of_seats_reserved: 3, reservation_date: Date.new(2017,9,10), hour: 1)
-      get :index
-      expect(assigns(:reservations)).to eq([reservation])
-    end
-
     it "renders the :index template" do
       get :index
       expect(response).to render_template(:index)
@@ -44,7 +38,7 @@ RSpec.describe ReservationsController, type: :controller do
         expect(response).to redirect_to(root_path)
       end
 
-      it "flashes a success message when seats are available" do
+      it "flashes a success message when reservation is successfully made" do
         Table.create(number:2, num_of_seats: 4)
         post :create, { reservation: { name: "test", num_of_seats_reserved: 3, reservation_date: Date.new(2017,9,10), hour: 1 } }
         expect(flash.now[:notice]).to eq("Reservation has successfully been created")

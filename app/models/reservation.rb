@@ -12,11 +12,11 @@ class Reservation < ActiveRecord::Base
     seats_needed = reservation_params[:num_of_seats_reserved].to_i
 
     while seats_needed > 0
-      if compare_seats(available_tables[-1], seats_needed)
+      if need_more_seats(available_tables[-1], seats_needed)
         book_table(reservation_params, available_tables[-1])
       else
         available_tables.each do |table|
-          book_table(reservation_params, table) if !compare_seats(table, seats_needed)
+          book_table(reservation_params, table) if !need_more_seats(table, seats_needed)
           break
         end
       end
@@ -30,7 +30,7 @@ class Reservation < ActiveRecord::Base
     @reservation.save
   end
 
-  def self.compare_seats(table, seats_needed)
+  def self.need_more_seats(table, seats_needed)
     table.num_of_seats <= seats_needed
   end
 
